@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 // use Illuminate\Support\Str; 
-
 class CreateUsersTable extends Migration
 {
     /**
@@ -27,30 +26,31 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
         DB::table('users')->insert(
             array(
-                'firstname'=>'admin',
-                'lastname'=>'user',
-                'role'=>1,
-                'email'=>'admin@example.com',
-                'position_id'=>1,
-                'password'=>bcrypt('password'),
-                'remember_toke'=> Str::random(10)
+            'firstname'=>'admin',
+            'lastname'=>'user',
+            'role'=>1,
+            'email'=>'admin@example.com',
+            'position_id' >1,
+            'password'=>bcrypt('password'),
+            'remember_token'=>Str::random(10)
             )
         );
         DB::table('users')->insert(
             array(
-                'firstname' =>'normal',
-                'lastname' =>'user',
-                'role' =>0,
-                'email' =>'normal@example.com',
-                'position_id' =>4,
-                'password' =>bcrypt('password'),
-                'remember_toke' => Str::random(10)
+            'firstname'=>'normal',
+            'lastname'=>'user',
+            'role' =>0,
+            'email'=>'normal@example.com',
+            'position_id'=>2,
+            'password'=>bcrypt('password'),
+            'remember_token'=>Str::random(10)
             )
         );
     }
- 
+
     /**
      * Reverse the migrations.
      *
