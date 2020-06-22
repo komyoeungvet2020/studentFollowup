@@ -15,6 +15,7 @@ class studentController extends Controller
     public function index()
     {
         $student = Student::all();
+        $user = User::all();
         return view('student.viewStudent',compact('student'));
     }
 
@@ -25,7 +26,7 @@ class studentController extends Controller
      */
     public function create()
     {
-        return view('student.addStudent');
+        return view('student.viewStudent');
     }
 
     /**
@@ -38,10 +39,18 @@ class studentController extends Controller
     {   
         $student = new\App\Student;
         $student->firstname = $request->get('first');
+        $student->activeFollowup =1;
         $student->lastname = $request->get('last');
         $student->class = $request->get('class');
         $student->description = $request->get('descript');
-        $student->picture = $request->get('picture');
+        if ($request->hasfile('picture')){
+            $file = $request->file('picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). ".".$extension;
+            $file->move('img/', $filename);
+            $student->picture = $filename;
+            $student->save();
+        }
         $student->save();
         return redirect('student');
     }
@@ -54,7 +63,8 @@ class studentController extends Controller
      */
     public function show($id)
     {
-        //
+        $students = Student::find($id);
+        return view('student.detailStudent',compact('students'));
     }
 
     /**
@@ -84,7 +94,15 @@ class studentController extends Controller
         $student->lastname = $request->get('last');
         $student->class = $request->get('class');
         $student->description = $request->get('descript');
-        $student->picture = $request->get('picture');
+        $student->activeFollowup = 1;
+        if ($request->hasfile('picture')){
+            $file = $request->file('picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). ".".$extension;
+            $file->move('img/', $filename);
+            $student->picture = $filename;
+            $student->save();
+        }
         $student->save();
         return redirect('student');
     }
@@ -98,4 +116,24 @@ class studentController extends Controller
     {
         //
     }
+    public function outfollowup($id)
+    {
+        $student = Student::find($id);
+        $student->activeFollowup = 0;
+        $student->save();
+        return redirect('/outFollowupView');
+    }
+    public function studentfollowup($id)
+    {
+        $student = Student::find($id);
+        $student->activeFollowup = 1;
+        $student->save();
+        return redirect('student');
+    }
+
+    public function outFollowupView(){
+        $student = Student::all();
+        return view('student.outfollowup', compact('student'));
+    }
+
 }

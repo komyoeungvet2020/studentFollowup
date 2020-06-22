@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header text-center">List of Student follow up</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,7 +15,8 @@
                         </div>
                     @endif
                     <div class="col-6">
-                        <a href="{{route('student.index')}}">studentFollowup</a>
+                        <a href="{{route('outFollowupView')}}" class="float-right btn btn-primary">OutFollowup</a>
+                        <a href="{{route('student.index')}}" class="btn btn-danger">Followup</a>
                     </div>
                 </div>
             </div>

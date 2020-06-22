@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Route::resource('student','studentController');
-Route::resource('studentOut','outFollowupController');
-
+Route::get('/outFollowupView', 'studentController@outFollowupView')->name('outFollowupView');
+Route::get('/outfollowup/{id}', 'studentController@outfollowup')->name('outfollowup');
+Route::get('/followup/{id}', 'studentController@studentfollowup')->name('followup');
+Route::get('/detailStudent/{id}', 'studentController@detailStudent')->name('detailStudent');
 
 Route::get('showComment/{id}','commentController@showComment')->name('showComment');
 Auth::routes();

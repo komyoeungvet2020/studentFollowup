@@ -10,6 +10,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
+    @if (auth::user()->firstname =='admin')
     <div class="container mt-5">
         <div class="col-12">
             <table class="table table-bordered">
@@ -18,23 +19,24 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Class</th>
-                    <th>Description</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($student as $students)
+                   @if ($students->activeFollowup == 0) 
                 <tr>
-                    <td>{{$students->picture}}</td>
+                    <td><img src="{{asset('img/'.$students->picture)}}" style="width:80px"></td>
                     <td>{{$students->firstname}}</td>
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
-                    <td>{{$students->description}}</td>
                     <td>
-                        <a href=""><button><i class='fas fa-pen' style="color: teal"></i></button></a>
+                        <a href="{{route('followup', $students->id)}}"><i class="fas fa-sign-in-alt"></i></a>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </table>
         </div>
     </div>
+    @endif
 </body>
 </html>

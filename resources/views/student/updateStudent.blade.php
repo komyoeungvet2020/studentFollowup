@@ -13,9 +13,9 @@
             <div class="col-3"></div>
             <div class="col-6">
                 <div class="card">
-                    <div class="card-header"><strong>Student</strong></div>
+                    <div class="card-header"><strong>Update Student</strong></div>
                     <div class="card-body">
-                        <form action="{{route('student.update',$student->id)}}" method="POST">
+                        <form action="{{route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
                             @method('patch')
                             @csrf
                             <div class="form-group">
@@ -31,10 +31,10 @@
                                 <input type="text" name="descript" class="form-control" value="{{$student->description}}">
                             </div>
                             <div class="form-group">
-                                <input type="file" name="picture" class="form-control" value="{{$student->picture}}">
+                                <input type="file" name="picture" class="form-control" value="{{$student->picture}}" required autocomplete="picture">
                             </div>
                             <button type="submit" class="btn btn-success float-right">Submit</button>
-                            <button type="reset" class="btn btn-danger">Cancel</button>
+                            <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>
                         </form>
                     </div>
                 </div>

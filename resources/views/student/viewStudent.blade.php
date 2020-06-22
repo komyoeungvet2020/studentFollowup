@@ -8,35 +8,87 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+    @if (Auth::user()->firstname == 'admin')
     <div class="container mt-5">
         <div class="col-12">
-            <a href="{{route('student.create')}}"><button class="btn btn-primary">add student</button></a>
+            <a href="{{route('student.create')}}" data-toggle="modal" data-target="#myModal"><button class="btn btn-primary">add student</button></a>
             <table class="table table-bordered">
                 <tr>
-                    <th>Picture</th>
+                    <th>Profile</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Class</th>
-                    <th>Description</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($student as $students)
+                @if ($students->activeFollowup ==1)
                 <tr>
-                    <td>{{$students->picture}}</td>
+                    <td><img src="{{asset('img/'.$students->picture)}}" style="width:80px"></td>
                     <td>{{$students->firstname}}</td>
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
-                    <td>{{$students->description}}</td>
                     <td>
-                        <a href="{{route('student.edit',$students->id)}}"><button><i class='fas fa-pen' style="color: teal"></i></button></a>
-                        <a href="{{route('showComment',$students->id)}}"><button><i class='fas fa-pen' style="color: teal"></i></button></a>
+                        <a href="{{route('student.edit',$students->id)}}"><i class='fas fa-pen' style="color: teal"></i></a>
+                        <a href="{{route('student.show',$students->id)}}" ><i class="fas fa-eye"></i></a>
+                        <a href="{{route('showComment',$students->id)}}"><i class="fas fa-comment" style="color:green"></i></a>
+                        <a href="{{route('outfollowup', $students->id)}}"><i class="fas fa-sign-out-alt" ></i></a>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </table>
         </div>
     </div>
+    @endif
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" class="text-center">Add Student</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                                <form action="{{route('student.store')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="text" name="first" class="form-control" placeholder="Firstname">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="last" class="form-control" placeholder="Lastname">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="class" class="form-control" placeholder="Class">
+                                    </div>
+                                    <div class="form-group"> 
+                                        <input type="file" name="picture" class="form-control" required autocomplete="picture">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="descript" id="" class="form-control" placeholder="Description...."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                                    <button type="button" class="btn btn-danger" style="color:#fff"><a href="{{route('student.index')}}">Cancel</a></button>
+                            </form>
+                        </div>
+                     </div>
+                 </div>
+              </div>
+           </div>
+       </div>
+    </div>
+  
 </body>
 </html>
