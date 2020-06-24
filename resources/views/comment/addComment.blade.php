@@ -14,13 +14,13 @@
               <div class="card">
                   <div class="card-header">Comment</div>
                   <div class="card-body">
-                      <form action="{{route('showComment',$student->id)}}" method="POST">
+                      <form action="{{route('addComment',$student->id)}}" method="POST">
                         @csrf
                           <div class="form-group">
                               <input type="text" name="comment" class="form-control" placeholder="Comment">
                           </div>
                           <button type="submit" class="btn btn-success float-right">Submit</button>
-                          <button type="reset" class="btn btn-danger">Cancel</button>
+                          <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>
                       </form>
                   </div>
               </div>

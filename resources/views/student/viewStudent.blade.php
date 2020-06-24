@@ -34,10 +34,10 @@
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
                     <td>
-                        <a href="{{route('student.edit',$students->id)}}"><i class='fas fa-pen' style="color: teal"></i></a>
-                        <a href="{{route('student.show',$students->id)}}" ><i class="fas fa-eye"></i></a>
-                        <a href="{{route('showComment',$students->id)}}"><i class="fas fa-comment" style="color:green"></i></a>
-                        <a href="{{route('outfollowup', $students->id)}}"><i class="fas fa-sign-out-alt" ></i></a>
+                        <a href="{{route('student.show',$students->id)}}" ><i class="fas fa-eye" style="color: teal"></i></a>
+                        
+                        <a href="{{route('student.edit',$students->id)}}"><i class='fas fa-pen'></i></a>
+                        <a href="{{route('outfollowup', $students->id)}}"><i class="fas fa-user-times" style="color: green"></i></a>
                     </td>
                 </tr>
                 @endif
@@ -70,8 +70,17 @@
                                     <div class="form-group">
                                         <input type="text" name="last" class="form-control" placeholder="Lastname">
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <input type="text" name="class" class="form-control" placeholder="Class">
+                                        <select name="class" class="form-control">
+                                            <option value="">--Class--</option>
+                                            <option value="WEB2020A">WEB2020A</option>
+                                            <option value="WEB2020B">WEB2020B</option>
+                                            <option value="SNA2020">SNA2020</option>
+                                            <option value="2021A">2021A</option>
+                                            <option value="2021B">2021B</option>
+                                            <option value="2021C">2021C</option>
+                                        </select>
                                     </div>
                                     <div class="form-group"> 
                                         <input type="file" name="picture" class="form-control" required autocomplete="picture">
@@ -83,12 +92,12 @@
                                     <button type="button" class="btn btn-danger" style="color:#fff"><a href="{{route('student.index')}}">Cancel</a></button>
                             </form>
                         </div>
+                        </div>
                      </div>
                  </div>
               </div>
            </div>
        </div>
     </div>
-  
 </body>
 </html>

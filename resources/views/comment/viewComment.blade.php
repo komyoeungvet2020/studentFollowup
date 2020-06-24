@@ -11,28 +11,24 @@
 </head>
 <body>
       <div class="container mt-5">
-          <a href=""><button class="btn btn-primary">Add comment</button></a>
           <div class="col-1"></div>
           <div class="col-10">
-            <?php
-                $role = DB::table('users')->where('user_id', Auth::user()->id)->first();
-                ?>
               <table class="table table-bordered">
                   <tr>
-                      <th>ID</th>
-                      <th>comment</th>
+                      <th>Student</th>
+                      <th>Comment</th>
+                      <th>Tutor</th>
                       <th>Action</th>
                   </tr>
-                  @foreach ($student->comments as $comment)
                   <tr>
-                    <td>{{$comment->id}}</td>
-                    <td>{{$comment->student->firstname}}.{{$comment->student->lastname}}</td>
-                    <td>{{$comment->user->firstname}}</td>
+                    <td>{{$student->firstname." "}}{{" ".$student->lastname}}</td>
+                    @foreach ($student->comments as $comment)
                     <td>{{$comment->comment}}</td>
+                    <td>{{$comment->user->firstname}}</td>
                     <td>
                         @if ($comment->user->firstname == Auth::user()->firstname)
-                        <a href=""><button><i class='fas fa-pen' style="color: teal"></i></button></a>
-                        <a href=""><button><i class='fas fa-trash' style="color: red"></i></button></a>
+                        <a href="{{route('editComment',$comment->id)}}"><i class='fas fa-pen' style="color: teal"></i></a>
+                        <a href="{{route('deleteComment',$comment->id)}}"><i class='fas fa-trash' style="color: red"></i></a>
                         @endif
                     </td>
                  </tr>

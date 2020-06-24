@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Student;
+use App\User;
+use App\Position;
 class Comment extends Model
 {
     protected $fillable = [
@@ -14,5 +16,8 @@ class Comment extends Model
     }
     public function student(){
         return $this->belongsTo(Student::class,'student_id');
+    }
+    public function position(){
+        return $this->belongsTo(Position::class);
     }
 }

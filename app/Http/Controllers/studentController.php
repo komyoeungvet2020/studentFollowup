@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Student;
 use App\User;
+use Auth;
 class studentController extends Controller
 {
     /**
@@ -37,12 +38,14 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {   
+        $user = User::find(Auth::id());
         $student = new\App\Student;
         $student->firstname = $request->get('first');
         $student->activeFollowup =1;
         $student->lastname = $request->get('last');
         $student->class = $request->get('class');
         $student->description = $request->get('descript');
+        $student->user_id = $user->id;
         if ($request->hasfile('picture')){
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();

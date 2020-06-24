@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AddStudent</title>
+    <title>update</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -13,22 +13,29 @@
             <div class="col-3"></div>
             <div class="col-6">
                 <div class="card">
-                    <div class="card-header"><strong>Update Student</strong></div>
+                    <div class="card-header text-center"><strong>Update Student</strong></div>
                     <div class="card-body">
                         <form action="{{route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
                             @method('patch')
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="first" class="form-control" value="{{$student->firstname}}">
+                                <input type="text" name="first" class="form-control" value="{{$student->firstname}}"required>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="last" class="form-control" value="{{$student->lastname}}">
+                                <input type="text" name="last" class="form-control" value="{{$student->lastname}}"required>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="class" class="form-control" value="{{$student->class}}">
+                                <select name="class" class="form-control">
+                                        <option {{($student->class =='WEB2020A')? "selected":""}}>WEB2020A</option>
+                                        <option {{($student->class =='WEB2020B')? "selected":""}}>WEB2020B</option>
+                                        <option {{($student->class =='SNA2020')? "selected":""}}>SNA2020</option>
+                                        <option {{($student->class =='2021A')? "selected":""}}>2021A</option>
+                                        <option {{($student->class =='2021B')? "selected":""}}>2021B</option>
+                                        <option {{($student->class =='2021C')? "selected":""}}>2021C</option>  
+                                </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="descript" class="form-control" value="{{$student->description}}">
+                                <textarea name="descript"  class="form-control" value="{{$student->description}}" required></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="file" name="picture" class="form-control" value="{{$student->picture}}" required autocomplete="picture">

@@ -29,7 +29,7 @@
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
                     <td>
-                        <a href="{{route('followup', $students->id)}}"><i class="fas fa-sign-in-alt"></i></a>
+                        <a href="{{route('followup', $students->id)}}"><i class="fas fa-user-plus" style="color: red"></i></a>
                     </td>
                 </tr>
                 @endif

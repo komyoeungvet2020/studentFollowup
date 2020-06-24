@@ -37,6 +37,10 @@
                         <th class="header-table">Descrition</th>
                         <td>{{$students->description}}</td>
                       </tr>
+                      <tr>
+                        <th class="header-table">Comment</th>
+                        <td><a href="{{route('createComment',$students->id)}}"><i class="fas fa-comment" style="color:green"></i></a></td>
+                      </tr>
                       @endif
             </table>
         </div>
