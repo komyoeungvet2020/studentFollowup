@@ -11,20 +11,7 @@
       <div class="container mt-5">
           <div class="col-3"></div>
           <div class="col-6">
-              <div class="card">
-                  <div class="card-header text-center">Update comment</div>
-                  <div class="card-body">
-                      <form action="{{route('updateComment',$comment->id)}}" method="POST">
-                        @csrf
-                        @method('patch')
-                          <div class="form-group">
-                              <input type="text" name="comment" class="form-control" value="{{$comment->comment}}">
-                          </div>
-                          <button type="submit" class="btn btn-success float-right">Submit</button>
-                          <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>
-                      </form>
-                  </div>
-              </div>
+             
           </div>
           <div class="col-3"></div>
       </div>

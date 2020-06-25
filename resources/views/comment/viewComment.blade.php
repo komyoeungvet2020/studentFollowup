@@ -13,27 +13,7 @@
       <div class="container mt-5">
           <div class="col-1"></div>
           <div class="col-10">
-              <table class="table table-bordered">
-                  <tr>
-                      <th>Student</th>
-                      <th>Comment</th>
-                      <th>Tutor</th>
-                      <th>Action</th>
-                  </tr>
-                  <tr>
-                    <td>{{$student->firstname." "}}{{" ".$student->lastname}}</td>
-                    @foreach ($student->comments as $comment)
-                    <td>{{$comment->comment}}</td>
-                    <td>{{$comment->user->firstname}}</td>
-                    <td>
-                        @if ($comment->user->firstname == Auth::user()->firstname)
-                        <a href="{{route('editComment',$comment->id)}}"><i class='fas fa-pen' style="color: teal"></i></a>
-                        <a href="{{route('deleteComment',$comment->id)}}"><i class='fas fa-trash' style="color: red"></i></a>
-                        @endif
-                    </td>
-                 </tr>
-                  @endforeach
-              </table>
+              
           </div>
           <div class="col-1"></div>
       </div>

@@ -23,7 +23,6 @@ Route::get('/followup/{id}', 'studentController@studentfollowup')->name('followu
 Route::get('/detailStudent/{id}', 'studentController@detailStudent')->name('detailStudent');
 
 Route::get('showComment/{id}','commentController@showComment')->name('showComment');
-Route::get('createComment/{id}','commentController@createComment')->name('createComment');
 Route::post('addComment/{id}','commentController@addComment')->name('addComment');
 Route::get('editComment/{id}','commentController@editComment')->name('editComment');
 Route::patch('updateComment/{id}','commentController@updateComment')->name('updateComment');

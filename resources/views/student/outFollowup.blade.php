@@ -10,7 +10,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
-    @if (auth::user()->firstname =='admin')
+    
     <div class="container mt-5">
         <div class="col-12">
             <table class="table table-bordered">
@@ -29,7 +29,9 @@
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
                     <td>
+                      @if (auth::user()->firstname =='admin')
                         <a href="{{route('followup', $students->id)}}"><i class="fas fa-user-plus" style="color: red"></i></a>
+                        @endif
                     </td>
                 </tr>
                 @endif
@@ -37,6 +39,5 @@
             </table>
         </div>
     </div>
-    @endif
 </body>
 </html>

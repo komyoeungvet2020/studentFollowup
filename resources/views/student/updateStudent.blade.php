@@ -35,10 +35,16 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea name="descript"  class="form-control" value="{{$student->description}}" required></textarea>
-                            </div>
+                                <select name="tutor" class="form-control">
+                                    <option {{($student->user->firstname == 'admin')? "selected":""}}>admin</option>
+                                    <option {{($student->user->firstname == 'normal')? "selected":""}}>normal</option>
+                                </select>
+                           </div>
+                           <div class="form-group">
+                            <input type="file" name="picture" class="form-control" value="{{$student->picture}}" required autocomplete="picture">
+                           </div>
                             <div class="form-group">
-                                <input type="file" name="picture" class="form-control" value="{{$student->picture}}" required autocomplete="picture">
+                                <textarea name="descript"  class="form-control" value="{{$student->description}}" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-success float-right">Submit</button>
                             <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>

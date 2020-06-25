@@ -14,10 +14,12 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    @if (Auth::user()->firstname == 'admin')
+    
     <div class="container mt-5">
         <div class="col-12">
+        @if (Auth::user()->firstname == 'normal')
             <a href="{{route('student.create')}}" data-toggle="modal" data-target="#myModal"><button class="btn btn-primary">add student</button></a>
+            @endif
             <table class="table table-bordered">
                 <tr>
                     <th>Profile</th>
@@ -35,9 +37,10 @@
                     <td>{{$students->class}}</td>
                     <td>
                         <a href="{{route('student.show',$students->id)}}" ><i class="fas fa-eye" style="color: teal"></i></a>
-                        
+                        @if (Auth::user()->firstname == 'normal')
                         <a href="{{route('student.edit',$students->id)}}"><i class='fas fa-pen'></i></a>
                         <a href="{{route('outfollowup', $students->id)}}"><i class="fas fa-user-times" style="color: green"></i></a>
+                         @endif
                     </td>
                 </tr>
                 @endif
@@ -45,7 +48,6 @@
             </table>
         </div>
     </div>
-    @endif
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -70,7 +72,12 @@
                                     <div class="form-group">
                                         <input type="text" name="last" class="form-control" placeholder="Lastname">
                                     </div>
-                                    
+                                    <div class="form-group">
+                                         <select name="tutor" class="form-control">
+                                             <option value="admin">admin</option>
+                                             <option value="normal">normal</option>
+                                         </select>
+                                    </div>
                                     <div class="form-group">
                                         <select name="class" class="form-control">
                                             <option value="">--Class--</option>

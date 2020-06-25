@@ -19,7 +19,6 @@ class studentController extends Controller
         $user = User::all();
         return view('student.viewStudent',compact('student'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -46,6 +45,7 @@ class studentController extends Controller
         $student->class = $request->get('class');
         $student->description = $request->get('descript');
         $student->user_id = $user->id;
+        $student->user->firstname = $request->get('tutor');
         if ($request->hasfile('picture')){
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
@@ -57,7 +57,6 @@ class studentController extends Controller
         $student->save();
         return redirect('student');
     }
-
     /**
      * Display the specified resource.
      *
@@ -66,8 +65,8 @@ class studentController extends Controller
      */
     public function show($id)
     {
-        $students = Student::find($id);
-        return view('student.detailStudent',compact('students'));
+        $student = Student::find($id);
+        return view('student.detailStudent',compact('student'));
     }
 
     /**
@@ -81,7 +80,6 @@ class studentController extends Controller
         $student = Student::find($id);
         return view('student.updateStudent',compact('student'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -91,13 +89,14 @@ class studentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $user = User::find(Auth::id());
         $student = new\App\Student;
         $student->firstname = $request->get('first');
         $student->lastname = $request->get('last');
         $student->class = $request->get('class');
         $student->description = $request->get('descript');
         $student->activeFollowup = 1;
+        $student->user_id = $user->id;
         if ($request->hasfile('picture')){
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
