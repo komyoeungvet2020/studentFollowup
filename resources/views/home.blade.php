@@ -14,13 +14,20 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="col-6">
-                        <a href="{{route('outFollowupView')}}" class="float-right btn btn-primary">OutFollowup</a>
-                        <a href="{{route('student.index')}}" class="btn btn-danger">Followup</a>
-                    </div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="{{route('student.index')}}">Follow up student</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="{{route('outFollowupView')}}">Out Follow Up</a>
+                        </li>
+                    </ul>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

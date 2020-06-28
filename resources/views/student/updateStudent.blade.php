@@ -15,6 +15,7 @@
                 <div class="card">
                     <div class="card-header text-center"><strong>Update Student</strong></div>
                     <div class="card-body">
+                        
                         <form action="{{route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
                             @method('patch')
                             @csrf
@@ -41,11 +42,12 @@
                                 </select>
                            </div>
                            <div class="form-group">
-                            <input type="file" name="picture" class="form-control" value="{{$student->picture}}" required autocomplete="picture">
+                            <input type="file" name="picture" class="form-control" value="{{$student->picture}}" >
                            </div>
                             <div class="form-group">
-                                <textarea name="descript"  class="form-control" value="{{$student->description}}" required></textarea>
+                                <textarea name="descript"  class="form-control" required>{{$student->description}}</textarea>
                             </div>
+                           
                             <button type="submit" class="btn btn-success float-right">Submit</button>
                             <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>
                         </form>

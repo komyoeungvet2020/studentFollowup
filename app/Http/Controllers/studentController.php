@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Student;
 use App\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 class studentController extends Controller
 {
     /**
@@ -104,6 +103,8 @@ class studentController extends Controller
             $file->move('img/', $filename);
             $student->picture = $filename;
             $student->save();
+        }else{
+            $student->picture ="person.jpg";
         }
         $student->save();
         return redirect('student');

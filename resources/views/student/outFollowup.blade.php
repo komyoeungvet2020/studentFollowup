@@ -22,14 +22,14 @@
                     <th>Action</th>
                 </tr>
                 @foreach ($student as $students)
-                   @if ($students->activeFollowup == 0) 
+                   @if ($students->activeFollowup == 0)
                 <tr>
                     <td><img src="{{asset('img/'.$students->picture)}}" style="width:80px"></td>
                     <td>{{$students->firstname}}</td>
                     <td>{{$students->lastname}}</td>
                     <td>{{$students->class}}</td>
                     <td>
-                      @if (auth::user()->firstname =='admin')
+                      @if (Auth::user()->firstname =='admin')
                         <a href="{{route('followup', $students->id)}}"><i class="fas fa-user-plus" style="color: red"></i></a>
                         @endif
                     </td>

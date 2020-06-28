@@ -14,10 +14,9 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    
     <div class="container mt-5">
         <div class="col-12">
-        @if (Auth::user()->firstname == 'normal')
+        @if (Auth::user()->firstname == 'admin')
             <a href="{{route('student.create')}}" data-toggle="modal" data-target="#myModal"><button class="btn btn-primary">add student</button></a>
             @endif
             <table class="table table-bordered">
@@ -37,7 +36,7 @@
                     <td>{{$students->class}}</td>
                     <td>
                         <a href="{{route('student.show',$students->id)}}" ><i class="fas fa-eye" style="color: teal"></i></a>
-                        @if (Auth::user()->firstname == 'normal')
+                        @if (Auth::user()->firstname == 'admin')
                         <a href="{{route('student.edit',$students->id)}}"><i class='fas fa-pen'></i></a>
                         <a href="{{route('outfollowup', $students->id)}}"><i class="fas fa-user-times" style="color: green"></i></a>
                          @endif
@@ -48,7 +47,7 @@
             </table>
         </div>
     </div>
-  <!-- The Modal -->
+    <!-- Form for add student -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -93,7 +92,7 @@
                                         <input type="file" name="picture" class="form-control" required autocomplete="picture">
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="descript" id="" class="form-control" placeholder="Description...."></textarea>
+                                        <textarea name="descript" id="" class="form-control" required placeholder="Description...."></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-success float-right">Submit</button>
                                     <button type="button" class="btn btn-danger" style="color:#fff"><a href="{{route('student.index')}}">Cancel</a></button>

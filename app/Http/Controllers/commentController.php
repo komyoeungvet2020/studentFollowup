@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Student;
 use App\User;
 use App\Comment;
-use Auth;
 class commentController extends Controller
 {
     public function showComment($id){
@@ -31,7 +30,7 @@ class commentController extends Controller
         $comment = Comment::find($id);
         $comment->comment = $request->get('comment');
         $comment->save();
-        return redirect()->back();
+        return redirect('student/'.$comment->student['id']);
     }
     function deleteComment($id){
            $comment = Comment::find($id);

@@ -13,9 +13,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+  <!--table for view detail student-->
     <div class="container mt-5">
         <div class="col-8">
-            <table class="table table-bordered">
+            <table class="table table-border">
                 @if ($student->activeFollowup ==1)
                 <tr>
                     <th class="header-table">Profile</th>
@@ -43,6 +44,7 @@
                       </tr>
                       @endif
                  </table>
+          <!-- Form for add comments -->
                 <form action="{{route('addComment',$student->id)}}" method="POST">
                 @csrf
                   <div class="form-group">
@@ -50,54 +52,20 @@
                   </div>
                   <button type="submit" class="btn btn-success float-right">Post</button>
               </form>
-              <table class="table table-bordered">
-                <tr>
-                    <th>Student</th>
-                    <th>Comment</th>
-                    <th>Tutor</th>
-                    <th>Action</th>
-                </tr>
-                <tr>
-                  <td>{{$student->firstname." "}}{{" ".$student->lastname}}</td>
+         <!-- view comments-->
+                  <h6> Student name: {{$student->firstname." "}}{{" ".$student->lastname}}</h6>
                   @foreach ($student->comments as $comment)
-                  <td>{{$comment->comment}}</td>
-                  <td>{{$comment->user->firstname}}</td>
-                  <td>
-                      @if ($comment->user->firstname == Auth::user()->firstname)
-                      <a href="{{route('editComment',$comment->id)}}" data-toggle="modal" data-target="#myModal"><i class='fas fa-pen' style="color: teal"></i></a>
-                      <a href="{{route('deleteComment',$comment->id)}}" onclick="return confirm('Are you sure you want to delete?')"><i class='fas fa-trash' style="color: red"></i></a>
-                      @endif
-                  </td>
-               </tr>
+                   <h6>Comment by: {{$comment->user->firstname}} Date: {{$comment->created_at}}</h6>
+                   <div class="jumbotron" style="padding:15px">
+                    <p>{{$comment->comment}}</p>
+                    @if ($comment->user->firstname == Auth::user()->firstname)
+                    <a href="{{route('editComment',$comment->id)}}"><i class='fas fa-pen' style="color: teal"></i></a>
+                    <a href="{{route('deleteComment',$comment->id)}}" onclick="return confirm('Are you sure you want to delete?')"><i class='fas fa-trash' style="color: red"></i></a>
+                    @endif
+                   </div>
+                     
                 @endforeach
-            </table>
-         </div>
-         <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Update comment</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-                    <form action="{{route('updateComment',$comment->id)}}" method="POST">
-                      @csrf
-                      @method('patch')
-                        <div class="form-group">
-                            <textarea name="comment" value="{{$comment->comment}}" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary float-right">Save changes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </form>
-               </div>
-           </div>
-        </div>
-     </div>
-   </div> 
-    </body>
+            </div>
+         </div> 
+      </body>
 </html>
