@@ -53,9 +53,9 @@
                   <button type="submit" class="btn btn-success float-right">Post</button>
               </form>
          <!-- view comments-->
-                  <h6> Student name: {{$student->firstname." "}}{{" ".$student->lastname}}</h6>
+                  <h6> Student name: <strong>{{$student->firstname." "}}{{" ".$student->lastname}}</strong></h6>
                   @foreach ($student->comments as $comment)
-                   <h6>Comment by: {{$comment->user->firstname}} Date: {{$comment->created_at}}</h6>
+                   Comment by: <strong>{{$comment->user->firstname}} </strong> Date: {{$comment->created_at}}
                    <div class="jumbotron" style="padding:15px">
                     <p>{{$comment->comment}}</p>
                     @if ($comment->user->firstname == Auth::user()->firstname)

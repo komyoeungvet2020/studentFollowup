@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::resource('student','studentController');
+Route::resource('home','studentController');
 Route::get('/outFollowupView', 'studentController@outFollowupView')->name('outFollowupView');
 Route::get('/outfollowup/{id}', 'studentController@outfollowup')->name('outfollowup');
 Route::get('/followup/{id}', 'studentController@studentfollowup')->name('followup');

@@ -14,9 +14,7 @@ class studentController extends Controller
      */
     public function index()
     {
-        $student = Student::all();
-        $user = User::all();
-        return view('student.viewStudent',compact('student'));
+        //
     }
     /**
      * Show the form for creating a new resource.
@@ -25,7 +23,7 @@ class studentController extends Controller
      */
     public function create()
     {
-        return view('student.viewStudent');
+        return view('home');
     }
 
     /**
@@ -54,7 +52,7 @@ class studentController extends Controller
             $student->save();
         }
         $student->save();
-        return redirect('student');
+        return redirect('home');
     }
     /**
      * Display the specified resource.
@@ -86,6 +84,7 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function update(Request $request, $id)
     {
         $user = User::find(Auth::id());
@@ -96,6 +95,8 @@ class studentController extends Controller
         $student->description = $request->get('descript');
         $student->activeFollowup = 1;
         $student->user_id = $user->id;
+        $student->picture = $request->get('picture');
+        $student->picture = $request->get('image');
         if ($request->hasfile('picture')){
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
@@ -103,11 +104,9 @@ class studentController extends Controller
             $file->move('img/', $filename);
             $student->picture = $filename;
             $student->save();
-        }else{
-            $student->picture ="person.jpg";
         }
         $student->save();
-        return redirect('student');
+        return redirect('home');
     }
     /**
      * Remove the specified resource from storage.
@@ -124,16 +123,15 @@ class studentController extends Controller
         $student = Student::find($id);
         $student->activeFollowup = 0;
         $student->save();
-        return redirect('/outFollowupView');
+        return redirect('outFollowupView');
     }
     public function studentfollowup($id)
     {
         $student = Student::find($id);
         $student->activeFollowup = 1;
         $student->save();
-        return redirect('student');
+        return redirect('home');
     }
-
     public function outFollowupView(){
         $student = Student::all();
         return view('student.outfollowup', compact('student'));

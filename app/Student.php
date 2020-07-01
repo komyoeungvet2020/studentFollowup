@@ -2,7 +2,6 @@
 
 namespace App;
 use App\User;
-use App\Student;
 use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 

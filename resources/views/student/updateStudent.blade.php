@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>update</title>
+    <title>Update student</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -16,9 +16,14 @@
                     <div class="card-header text-center"><strong>Update Student</strong></div>
                     <div class="card-body">
                         
-                        <form action="{{route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('home.update',$student->id)}}" method="POST" enctype="multipart/form-data">
                             @method('patch')
                             @csrf
+                            <div class="form-group">
+                                <input type="file" name="picture" autocomplete="picture">
+                                <img src="{{asset('img/'.$student->picture)}}" style="width:80px">
+                                <input type="hidden" name="image" value="{{$student->picture}}">
+                               </div>
                             <div class="form-group">
                                 <input type="text" name="first" class="form-control" value="{{$student->firstname}}"required>
                             </div>
@@ -41,15 +46,11 @@
                                     <option {{($student->user->firstname == 'normal')? "selected":""}}>normal</option>
                                 </select>
                            </div>
-                           <div class="form-group">
-                            <input type="file" name="picture" class="form-control" value="{{$student->picture}}" >
-                           </div>
                             <div class="form-group">
                                 <textarea name="descript"  class="form-control" required>{{$student->description}}</textarea>
                             </div>
-                           
                             <button type="submit" class="btn btn-success float-right">Submit</button>
-                            <button type="reset" class="btn btn-danger"><a href="{{route('student.index')}}">Cancel</a></button>
+                            <button type="reset" class="btn btn-danger"><a href="{{route('home')}}">Cancel</a></button>
                         </form>
                     </div>
                 </div>

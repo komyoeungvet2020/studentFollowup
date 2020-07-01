@@ -30,11 +30,11 @@ class commentController extends Controller
         $comment = Comment::find($id);
         $comment->comment = $request->get('comment');
         $comment->save();
-        return redirect('student/'.$comment->student['id']);
+        return redirect('home/'.$comment->student['id']);
     }
     function deleteComment($id){
-           $comment = Comment::find($id);
-           $comment->delete();
-           return back();
+        $comment = Comment::find($id);
+        $comment->delete();
+        return redirect('home/'.$comment->student['id']);
     }
 }
