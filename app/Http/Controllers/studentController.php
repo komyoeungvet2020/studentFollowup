@@ -125,6 +125,13 @@ class studentController extends Controller
         $student->save();
         return redirect('outFollowupView');
     }
+    public function studentfollowup($id)
+    {
+        $student = Student::find($id);
+        $student->activeFollowup = 1;
+        $student->save();
+        return redirect('home');
+    }
     public function outFollowupView(){
         $student = Student::all();
         return view('student.outfollowup', compact('student'));
