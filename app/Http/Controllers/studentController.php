@@ -118,6 +118,13 @@ class studentController extends Controller
     {
         //
     }
+    public function outfollowup($id)
+    {
+        $student = Student::find($id);
+        $student->activeFollowup = 0;
+        $student->save();
+        return redirect('outFollowupView');
+    }
     public function outFollowupView(){
         $student = Student::all();
         return view('student.outfollowup', compact('student'));
