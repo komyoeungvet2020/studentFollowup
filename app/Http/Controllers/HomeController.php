@@ -26,7 +26,6 @@ class HomeController extends Controller
     {
         $student = Student::all();
         $user = User::all();
-        return view('home',compact(['user','student']));
+        return view('home',compact('user','student'));
     }
-    
 }
